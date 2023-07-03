@@ -13,7 +13,7 @@
 ### Tasks
 - Create POJO Class `Weather.java` which Variables for ```date``` and ```temperature``` for Weather information's
 - Create a Class `WeatherStation.java` in which you implement every method 
-  - Implement a method `generateWeatherData()` in which you generate Weather data (```Weather.class```)
+  - Implement a method `generateWeatherData()` in which you generate Weather data (```Weather.java```)
     - Print out this Data as a table format
   - Implement a method `lowestTemperature()` in which you find the lowest temperature
     - Print out this Data as a table format
