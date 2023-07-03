@@ -1,0 +1,2 @@
+# exercises
+Exercises for trainees
