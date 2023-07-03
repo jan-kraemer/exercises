@@ -22,6 +22,8 @@
   - Implement a method `averageTemperature()` in where you find the average temperature
     - Print out this data 
 
+---
+
 ### Example output
 #### `generateWeatherData()`
 
