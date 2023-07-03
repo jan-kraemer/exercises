@@ -25,7 +25,8 @@
 ### Example output
 #### `generateWeatherData()`
 
-```##########
+```
+##########
 WEATHER TABLE
 ##########
 ```
