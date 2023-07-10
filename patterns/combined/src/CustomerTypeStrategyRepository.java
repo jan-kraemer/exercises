@@ -2,24 +2,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerTypeStrategyRepository {
-  public static CustomerTypeStrategyRepository INSTANCE;
+  private static CustomerTypeStrategyRepository INSTANCE;
   private final List<CustomerTypeStrategy> customerTypeStrategies;
 
-  public CustomerTypeStrategyRepository() {
-    customerTypeStrategies =
-        new ArrayList<>(
-            List.of(NormalStrategy.builder().build(), PremiumStrategy.builder().build()));
-  }
-
-  public static CustomerTypeStrategyRepositoryBuilder builder() {
-    return new CustomerTypeStrategyRepositoryBuilder();
-  }
-
-  public static CustomerTypeStrategyRepository getInstance() {
+  public static synchronized CustomerTypeStrategyRepository getInstance() {
     if (INSTANCE == null) {
       INSTANCE = CustomerTypeStrategyRepository.builder().build();
     }
     return INSTANCE;
+  }
+
+  private static CustomerTypeStrategyRepositoryBuilder builder() {
+    return new CustomerTypeStrategyRepositoryBuilder();
+  }
+
+  private CustomerTypeStrategyRepository() {
+    customerTypeStrategies =
+        new ArrayList<>(List.of(NormalStrategy.getInstance(), PremiumStrategy.getInstance()));
   }
 
   public CustomerTypeStrategy findStrategyByCustomerType(CustomerType customerType) {
@@ -37,8 +36,8 @@ public class CustomerTypeStrategyRepository {
         + '}';
   }
 
-  public static class CustomerTypeStrategyRepositoryBuilder {
-    public CustomerTypeStrategyRepository build() {
+  private static class CustomerTypeStrategyRepositoryBuilder {
+    private CustomerTypeStrategyRepository build() {
       return new CustomerTypeStrategyRepository();
     }
   }

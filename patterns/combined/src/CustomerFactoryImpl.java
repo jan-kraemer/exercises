@@ -1,10 +1,18 @@
 public class CustomerFactoryImpl extends CustomerFactory {
+  private static CustomerFactoryImpl INSTANCE;
 
-  public CustomerFactoryImpl() {}
+  public static synchronized CustomerFactoryImpl getInstance() {
+    if (INSTANCE == null) {
+      INSTANCE = CustomerFactoryImpl.builder().build();
+    }
+    return INSTANCE;
+  }
 
-  public static CustomerFactoryImplBuilder builder() {
+  private static CustomerFactoryImplBuilder builder() {
     return new CustomerFactoryImplBuilder();
   }
+
+  private CustomerFactoryImpl() {}
 
   @Override
   protected Customer createCustomer(String name) {
@@ -15,8 +23,8 @@ public class CustomerFactoryImpl extends CustomerFactory {
         .build();
   }
 
-  public static class CustomerFactoryImplBuilder {
-    public CustomerFactoryImpl build() {
+  private static class CustomerFactoryImplBuilder {
+    private CustomerFactoryImpl build() {
       return new CustomerFactoryImpl();
     }
   }

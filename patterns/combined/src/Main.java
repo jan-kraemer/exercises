@@ -1,6 +1,6 @@
 public class Main {
   public static void main(String[] args) {
-    CustomerFactoryImpl customerFactory = CustomerFactoryImpl.builder().build();
+    CustomerFactoryImpl customerFactory = CustomerFactoryImpl.getInstance();
 
     Customer jan = customerFactory.create("Jan");
     Customer luca = customerFactory.create("Luca");

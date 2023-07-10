@@ -1,9 +1,19 @@
 public class PremiumStrategy implements CustomerTypeStrategy {
+  private static PremiumStrategy INSTANCE;
   private static final double PERCENT = 0.05;
 
-  public static NormalStrategyBuilder builder() {
-    return new NormalStrategyBuilder();
+  public static synchronized PremiumStrategy getInstance() {
+    if (INSTANCE == null) {
+      INSTANCE = PremiumStrategy.builder().build();
+    }
+    return INSTANCE;
   }
+
+  private static PremiumStrategyBuilder builder() {
+    return new PremiumStrategyBuilder();
+  }
+
+  private PremiumStrategy() {}
 
   @Override
   public double calculateAccountAfterInterest(double account) {
@@ -18,8 +28,8 @@ public class PremiumStrategy implements CustomerTypeStrategy {
     return CustomerType.PREMIUM.equals(customerType);
   }
 
-  public static class NormalStrategyBuilder {
-    public PremiumStrategy build() {
+  private static class PremiumStrategyBuilder {
+    private PremiumStrategy build() {
       return new PremiumStrategy();
     }
   }

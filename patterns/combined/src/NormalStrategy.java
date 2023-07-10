@@ -1,9 +1,19 @@
 public class NormalStrategy implements CustomerTypeStrategy {
+  private static NormalStrategy INSTANCE;
   private static final double PERCENT = 0.1;
 
-  public static NormalStrategyBuilder builder() {
+  public static synchronized NormalStrategy getInstance() {
+    if (INSTANCE == null) {
+      INSTANCE = NormalStrategy.builder().build();
+    }
+    return INSTANCE;
+  }
+
+  private static NormalStrategyBuilder builder() {
     return new NormalStrategyBuilder();
   }
+
+  private NormalStrategy() {}
 
   @Override
   public double calculateAccountAfterInterest(double account) {
@@ -18,8 +28,8 @@ public class NormalStrategy implements CustomerTypeStrategy {
     return CustomerType.NORMAL.equals(customerType);
   }
 
-  public static class NormalStrategyBuilder {
-    public NormalStrategy build() {
+  private static class NormalStrategyBuilder {
+    private NormalStrategy build() {
       return new NormalStrategy();
     }
   }

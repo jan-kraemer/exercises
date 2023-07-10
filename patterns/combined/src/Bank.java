@@ -1,12 +1,6 @@
 public class Bank implements IObserver {
   private static Bank INSTANCE;
 
-  private Bank() {}
-
-  public static BankBuilder builder() {
-    return new BankBuilder();
-  }
-
   public static synchronized Bank getInstance() {
     if (INSTANCE == null) {
       INSTANCE = Bank.builder().build();
@@ -14,14 +8,20 @@ public class Bank implements IObserver {
     return INSTANCE;
   }
 
+  private static BankBuilder builder() {
+    return new BankBuilder();
+  }
+
+  private Bank() {}
+
   @Override
   public void update(String name, double oldAccount, double newAccount) {
     System.out.printf("%s's account has changed from %s to %s%n", name, oldAccount, newAccount);
   }
 
-  public static class BankBuilder {
+  private static class BankBuilder {
 
-    public Bank build() {
+    private Bank build() {
       return new Bank();
     }
   }
